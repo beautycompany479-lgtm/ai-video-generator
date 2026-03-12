@@ -1,2 +1,19 @@
-<h1>AI Video Generator</h1>
-<p>My AI video generator site is coming soon.</p>
+<h1>AI Anime Generator</h1>
+
+<input type="text" id="prompt" placeholder="Describe your anime image">
+
+<button onclick="generate()">Generate</button>
+
+<br><br>
+
+<img id="result" width="300">
+
+<script>
+async function generate() {
+let prompt = document.getElementById("prompt").value;
+
+let url = "https://image.pollinations.ai/prompt/" + prompt;
+
+document.getElementById("result").src = url;
+}
+</script>
