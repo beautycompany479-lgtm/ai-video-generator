@@ -12,7 +12,6 @@
 async function generate() {
 let prompt = document.getElementById("prompt").value;
 
-let url = "https://image.pollinations.ai/prompt/" + encodeURIComponent(prompt);
-document.getElementById("result").src = url;
+let url = "https://image.pollinations.ai/prompt/" + encodeURIComponent(prompt) + "?width=512&height=512";
 }
 </script>
