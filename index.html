@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Anime Generator</title>
+</head>
+
+<body>
+
 <h1>AI Anime Generator</h1>
 
 <input id="prompt" placeholder="write your prompt">
@@ -8,6 +16,7 @@
 <img id="image" width="300">
 
 <script>
+
 async function generate() {
 
 let prompt = document.getElementById("prompt").value;
@@ -15,7 +24,7 @@ let prompt = document.getElementById("prompt").value;
 let response = await fetch("https://api.replicate.com/v1/predictions", {
 method: "POST",
 headers: {
-"Authorization": "Token https://api.replicate.com/v1/predictions",
+"Authorization": "Token r8_8I2BKrfL5gFO0Vvxn7qaBeKLfWRKpiJ16XP0I",
 "Content-Type": "application/json"
 },
 body: JSON.stringify({
@@ -32,7 +41,7 @@ setTimeout(async () => {
 
 let result = await fetch(data.urls.get, {
 headers: {
-"Authorization": "Token IL_TUO_TOKEN_REPLICATE"
+"Authorization": "Token r8_8I2BKrfL5gFO0Vvxn7qaBeKLfWRKpiJ16XP0I"
 }
 });
 
@@ -40,7 +49,11 @@ let resultData = await result.json();
 
 document.getElementById("image").src = resultData.output[0];
 
-}, 5000);
+}, 6000);
 
 }
+
 </script>
+
+</body>
+</html>
