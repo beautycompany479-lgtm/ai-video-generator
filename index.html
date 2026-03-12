@@ -1,6 +1,6 @@
 <h1>AI Anime Generator</h1>
 
-<input id="prompt" placeholder="Describe your anime image">
+<input id="prompt" placeholder="write your prompt">
 <button onclick="generate()">Generate</button>
 
 <br><br>
@@ -12,24 +12,35 @@ async function generate() {
 
 let prompt = document.getElementById("prompt").value;
 
-let response = await fetch(
-"https://api-inference.huggingface.co/models/runwayml/stable-diffusion-v1-5",
-{
+let response = await fetch("https://api.replicate.com/v1/predictions", {
 method: "POST",
 headers: {
-"Authorization": "Bearer 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",
+"Authorization": "Token https://api.replicate.com/v1/predictions",
 "Content-Type": "application/json"
 },
 body: JSON.stringify({
-inputs: prompt
-})
+version: "db21e45b037fa4e1b8f5fcbad3c0a6f4c8c6f7a8d9c3c3a5c9f7b0e1d5f9a6c",
+input: {
+prompt: prompt
 }
-);
+})
+});
 
-let blob = await response.blob();
-let url = URL.createObjectURL(blob);
+let data = await response.json();
 
-document.getElementById("image").src = url;
+setTimeout(async () => {
+
+let result = await fetch(data.urls.get, {
+headers: {
+"Authorization": "Token IL_TUO_TOKEN_REPLICATE"
+}
+});
+
+let resultData = await result.json();
+
+document.getElementById("image").src = resultData.output[0];
+
+}, 5000);
 
 }
 </script>
