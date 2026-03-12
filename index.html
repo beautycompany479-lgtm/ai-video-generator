@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Anime Generator</title>
+</head>
+
+<body>
+
 <h1>AI Anime Generator</h1>
 
 <input type="text" id="prompt" placeholder="Describe your anime image">
@@ -6,12 +14,21 @@
 
 <br><br>
 
-<img id="result" width="300">
+<img id="result" width="400">
 
 <script>
-async function generate() {
+
+function generate() {
+
 let prompt = document.getElementById("prompt").value;
 
-let url = "https://image.pollinations.ai/prompt/" + encodeURIComponent(prompt) + "?width=512&height=512";
+let url = "https://image.pollinations.ai/prompt/" + encodeURIComponent(prompt) + "?width=512&height=512&seed=" + Math.floor(Math.random()*100000);
+
+document.getElementById("result").src = url;
+
 }
+
 </script>
+
+</body>
+</html>
