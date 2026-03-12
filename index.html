@@ -1,34 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>AI Anime Generator</title>
-</head>
-
-<body>
-
 <h1>AI Anime Generator</h1>
 
-<input type="text" id="prompt" placeholder="Describe your anime image">
-
+<input id="prompt" placeholder="Describe your anime image">
 <button onclick="generate()">Generate</button>
 
 <br><br>
 
-<img id="result" width="400">
+<img id="image" width="300">
 
 <script>
-
-function generate() {
+async function generate() {
 
 let prompt = document.getElementById("prompt").value;
 
-let url = "https://image.pollinations.ai/prompt/" + encodeURIComponent(prompt) + "?width=512&height=512&seed=" + Math.floor(Math.random()*100000);
+let response = await fetch(
+"https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2",
+{
+method: "POST",
+headers: {
+"Authorization": "Bearer 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",
+"Content-Type": "application/json"
+},
+body: JSON.stringify({
+inputs: prompt
+})
+}
+);
 
-document.getElementById("result").src = url;
+let blob = await response.blob();
+let url = URL.createObjectURL(blob);
+
+document.getElementById("image").src = url;
 
 }
-
 </script>
-
-</body>
-</html>
